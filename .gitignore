@@ -169,3 +169,16 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+*.pkl
+*.keras
+*.h5
+*.pt
+*.onnx
+*.joblib
+*.sav
+*.mp4
+*.mov
+uploads/
+static/video/
+.DS_Store
+*.log
