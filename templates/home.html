@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Badminton Flex</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+  <!-- Custom Theme -->
+  <style>
+    :root {
+      --primary: #00c6ff;
+      --secondary: #0072ff;
+      --dark: #0f172a;
+      --darker: #020617;
+      --light: #f8fafc;
+      --gray: #94a3b8;
+    }
+
+    body {
+      background-color: var(--dark);
+      color: var(--light);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: var(--darker);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .navbar-brand {
+      font-weight: 800;
+      font-size: 1.8rem;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent !important;
+    }
+
+    .navbar-nav .nav-link {
+      color: var(--light) !important;
+      font-weight: 500;
+      position: relative;
+      margin: 0 8px;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: var(--primary) !important;
+    }
+
+    .navbar-nav .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      transition: width 0.3s;
+    }
+
+    .navbar-nav .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .dropdown-item:focus, .dropdown-item:hover {
+      background-color: #275a8d;
+    }
+
+    /* Hero Carousel */
+    .carousel {
+      margin-top: 56px; /* Account for fixed navbar */
+    }
+
+    .carousel-inner img {
+      height: 90vh;
+      object-fit: cover;
+      filter: brightness(0.7);
+    }
+
+    .carousel-caption {
+      bottom: 30%;
+      text-align: center;
+    }
+
+    .carousel-caption h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+      margin-bottom: 1.5rem;
+    }
+
+    .carousel-caption p {
+      font-size: 1.5rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+      margin-bottom: 2rem;
+    }
+
+    .carousel-caption .btn {
+      font-weight: 600;
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      transition: all 0.3s;
+    }
+
+    /* Features Section */
+    .features-section {
+      padding: 5rem 0;
+    }
+
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      color: white;
+      border-radius: 50%;
+      font-size: 2rem;
+      transition: all 0.3s;
+    }
+
+    .feature-item:hover .feature-icon {
+      transform: translateY(-10px) scale(1.1);
+      box-shadow: 0 10px 20px rgba(0, 198, 255, 0.3);
+    }
+
+    .feature-item h4 {
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    /* Practice Section */
+    .practice-section {
+      background: linear-gradient(rgba(2, 6, 23, 0.9), rgba(2, 6, 23, 0.9)), 
+                  url('/static/images/bg-pattern.png') center/cover;
+      padding: 5rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .practice-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('/static/images/bg-dots.png') center/cover;
+      opacity: 0.1;
+    }
+
+    .practice-section h2 {
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-control {
+      background-color: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+
+    .form-control:focus {
+      background-color: rgba(15, 23, 42, 0.9);
+      border-color: var(--primary);
+      color: white;
+      box-shadow: 0 0 0 0.25rem rgba(0, 198, 255, 0.25);
+    }
+
+    /* Live Pose Section */
+    .live-pose-section {
+      padding: 5rem 0;
+    }
+
+    .live-pose-section h2 {
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Cards */
+    .card {
+      background-color: rgba(15, 23, 42, 0.7);
+      border: none;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(8px);
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(0, 198, 255, 0.2);
+    }
+
+    .card-img-top {
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+
+    .card:hover .card-img-top {
+      transform: scale(1.05);
+    }
+
+    /* Buttons */
+    .btn-gradient {
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      border: none;
+      color: white;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(0, 198, 255, 0.3);
+    }
+
+    .btn-gradient:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 198, 255, 0.4);
+      color: white;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--darker);
+      color: var(--gray);
+      padding: 2rem 0;
+    }
+
+    /* Utility Classes */
+    .text-gradient {
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .bg-glass {
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">Badminton Flex</a>
+  
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/live_session">Practice</a></li>
+          <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+  
+          <!-- Profile Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center active" href="#" id="navbarProfile" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <span class="profile-avatar-small rounded-circle me-2 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: linear-gradient(45deg, var(--primary), var(--secondary));">
+                {{ user.name[0] | upper }}
+              </span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end bg-glass" aria-labelledby="navbarProfile">
+              <li><a class="dropdown-item text-light" href="/profile"><i class="bi bi-person me-2"></i>Profile</a></li>
+              <li><a class="dropdown-item text-light" href="#"><i class="bi bi-gear me-2"></i>Settings</a></li>
+              <li><hr class="dropdown-divider bg-secondary"></li>
+              <li><a class="dropdown-item text-light" href="/logout"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Carousel -->
+  <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="/static/images/hd-badminton-background-8imj866ff0amne5f.jpg" class="d-block w-100" alt="Hero Image 1">
+        <div class="carousel-caption animate__animated animate__fadeInUp">
+          <h1>Path to Badminton Success</h1>
+          <p>Unlock your potential with Real-Time training.</p>
+          <a href="/live_session" class="btn btn-gradient">Get Started <i class="bi bi-arrow-right ms-2"></i></a>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="/static/images/9a6058bf341f9cab68063aca0a34c66e_high.webp" class="d-block w-100" alt="Hero Image 2">
+        <div class="carousel-caption animate__animated animate__fadeInUp">
+          <h1>Real-Time Feedback</h1>
+          <p>Instant analysis and improvement for your game.</p>
+          <a href="/live_session" class="btn btn-gradient">Train Now <i class="bi bi-lightning-charge ms-2"></i></a>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="static/images/istockphoto-1094296340-612x612.jpg" class="d-block w-100" alt="Hero Image 3">
+        <div class="carousel-caption animate__animated animate__fadeInUp">
+          <h1>Smash Your Goals</h1>
+          <p>Track progress, improve skills, and win more games.</p>
+          <a href="/live_session" class="btn btn-gradient">Start Practicing <i class="bi bi-play-circle ms-2"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="container text-center">
+      <h2 class="text-gradient mb-5">Why Choose Badminton Flex?</h2>
+      
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="feature-item p-4">
+            <div class="feature-icon animate__animated animate__fadeInUp">
+              <i class="bi bi-speedometer2"></i>
+            </div>
+            <h4 class="animate__animated animate__fadeInUp animate__delay-1s">Real-Time Feedback</h4>
+            <p class="animate__animated animate__fadeInUp animate__delay-2s">Instant analysis of your shots with visual cues and performance metrics.</p>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="feature-item p-4">
+            <div class="feature-icon animate__animated animate__fadeInUp animate__delay-1s">
+              <i class="bi bi-graph-up"></i>
+            </div>
+            <h4 class="animate__animated animate__fadeInUp animate__delay-2s">Easy Tracking</h4>
+            <p class="animate__animated animate__fadeInUp animate__delay-3s">Monitor smash, clear, drive, and drop shots with detailed analytics.</p>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="feature-item p-4">
+            <div class="feature-icon animate__animated animate__fadeInUp animate__delay-2s">
+              <i class="bi bi-person-video3"></i>
+            </div>
+            <h4 class="animate__animated animate__fadeInUp animate__delay-3s">Train Without a Coach</h4>
+            <p class="animate__animated animate__fadeInUp animate__delay-4s">Perfect your form with guidance anytime, anywhere.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Practice Section -->
+  <section id="practice" class="py-5 bg-dark text-white">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <img src="/static/images/0b97bafc66863604c27b017513ae6035_high.webp" class="img-fluid rounded shadow" alt="Shot Classification">
+            </div>
+            <div class="col-md-6">
+                <h2>🏸 Badminton Shot Classification</h2>
+                <p>Upload a video and get insights on your shots with our smart engine.</p>
+
+                <!-- Form for video upload -->
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="videoFile" class="form-label">Select video file (MOV, MP4, AVI, etc.)</label>
+                        <input class="form-control" type="file" id="videoFile" name="file" accept="video/*" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Analyze Shot</button>
+                </form>
+
+                <!-- Progress bar for video upload -->
+                <div class="progress mt-3" style="display: none;">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%"></div>
+                </div>
+
+                <!-- Section for displaying preview frame from video -->
+                <div id="previewSection" class="text-center">
+                    <h4 class="mt-4">Sample Analysis Frame</h4>
+                    <img id="preview" class="img-fluid" style="display: none;">
+                </div>
+
+                <!-- Results section for analysis -->
+                <div id="results" class="d-none mt-4 p-3 bg-secondary rounded">
+                    <h5>Shot Action: <span id="shot_name">Waiting...</span></h5>
+                    <h6>Prediction Accuracy: <span id="shot_accuracy">0%</span></h6>
+                    <label for="accuracyRange" class="form-label">Accuracy</label>
+                    <input type="range" class="form-range" min="0" max="100" value="0" id="accuracyRange" disabled>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+  <!-- Live Pose Section -->
+  <section id="live-practice" class="live-pose-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6 order-md-2 animate__animated animate__fadeInRight">
+          <img src="/static/images/badminton-collection.avif" class="img-fluid rounded-4 shadow-lg" alt="Live Pose Estimation">
+        </div>
+        <div class="col-md-6 order-md-1 animate__animated animate__fadeInLeft">
+          <h2 class="text-gradient">📡 Live Pose Estimation</h2>
+          <p class="lead">Click below to start live pose detection & refine your game in real time!</p>
+          <a href="/live_session" class="btn btn-gradient btn-lg mt-3">
+            Start Live Session <i class="bi bi-camera-video ms-2"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center">
+    <div class="container">
+      <p>&copy; 2025 Badminton Flex | All Rights Reserved</p>
+      <div class="mt-3">
+        <a href="#" class="text-light me-3"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="text-light me-3"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="text-light me-3"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="text-light"><i class="bi bi-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- JS for Upload Functionality -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add animation on scroll
+      const animateElements = document.querySelectorAll('.animate__animated');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add(entry.target.dataset.animate);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+
+      animateElements.forEach(el => {
+        el.dataset.animate = el.classList.contains('animate__fadeIn') ? 'animate__fadeIn' : 
+                            el.classList.contains('animate__fadeInLeft') ? 'animate__fadeInLeft' :
+                            el.classList.contains('animate__fadeInRight') ? 'animate__fadeInRight' :
+                            el.classList.contains('animate__fadeInUp') ? 'animate__fadeInUp' : 'animate__fadeIn';
+        el.classList.remove('animate__animated', 'animate__fadeIn', 'animate__fadeInLeft', 'animate__fadeInRight', 'animate__fadeInUp');
+        observer.observe(el);
+      });
+
+      // Upload form functionality
+      document.getElementById('uploadForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const form = e.target;
+        const fileInput = document.getElementById('videoFile');
+        const progressBar = document.querySelector('.progress');
+        const progressBarInner = document.querySelector('.progress-bar');
+        const resultContainer = document.getElementById('results');
+        const shotName = document.getElementById('shot_name');
+        const shotAccuracy = document.getElementById('shot_accuracy');
+        const accuracyRange = document.getElementById('accuracyRange');
+        const previewImage = document.getElementById('preview');
+
+        // Reset UI
+        resultContainer.classList.add('d-none');
+        progressBar.style.display = 'block';
+        progressBarInner.style.width = '0%';
+
+        const formData = new FormData(form);
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/predict', true);
+
+        // Progress bar update
+        xhr.upload.onprogress = function(e) {
+          if (e.lengthComputable) {
+            const percentComplete = (e.loaded / e.total) * 100;
+            progressBarInner.style.width = percentComplete + '%';
+            progressBarInner.textContent = Math.round(percentComplete) + '%';
+          }
+        };
+
+        // Handle response
+        xhr.onload = function() {
+          progressBar.style.display = 'none';
+
+          if (xhr.status === 200) {
+            const response = JSON.parse(xhr.responseText);
+
+            if (response.error) {
+              alert(response.error);
+              return;
+            }
+
+            // Show the result section
+            resultContainer.classList.remove('d-none');
+
+            // Update the results with the data received from the server
+            shotName.textContent = response.prediction;
+            shotAccuracy.textContent = response.accuracy + '%';
+            accuracyRange.value = response.accuracy;
+
+            // Show preview frame if available
+            if (response.preview_image) {
+              previewImage.src = response.preview_image; // URL or base64 image
+              previewImage.style.display = 'block';
+            }
+
+          } else {
+            try {
+              const errorResponse = JSON.parse(xhr.responseText);
+              alert(errorResponse.error || 'Processing error');
+            } catch {
+              alert('Error processing video');
+            }
+          }
+        };
+
+        // Handle error
+        xhr.onerror = function() {
+          alert('An error occurred during the upload process.');
+        };
+
+        xhr.send(formData);
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us - Badminton Flex</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+  <!-- Custom Theme -->
+  <style>
+    :root {
+      --primary: #00c6ff;
+      --secondary: #0072ff;
+      --dark: #0f172a;
+      --darker: #020617;
+      --light: #f8fafc;
+      --gray: #94a3b8;
+    }
+
+    body {
+      background-color: var(--dark);
+      color: var(--light);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: var(--darker);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .navbar-brand {
+      font-weight: 800;
+      font-size: 1.8rem;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent !important;
+    }
+
+    .navbar-nav .nav-link {
+      color: var(--light) !important;
+      font-weight: 500;
+      position: relative;
+      margin: 0 8px;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: var(--primary) !important;
+    }
+
+    .navbar-nav .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      transition: width 0.3s;
+    }
+
+    .navbar-nav .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background: linear-gradient(rgba(2, 6, 23, 0.8), rgba(2, 6, 23, 0.8)), 
+                  url('/static/images/hd-badminton-background-8imj866ff0amne5f.jpg') center/cover no-repeat;
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      z-index: 2;
+    }
+
+    .hero-content h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      background: linear-gradient(to right, var(--light), var(--primary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-content p {
+      font-size: 1.5rem;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+
+    /* Section Titles */
+    .section-title {
+      font-weight: 800;
+      position: relative;
+      display: inline-block;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 60%;
+      height: 4px;
+      bottom: -10px;
+      left: 20%;
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      border-radius: 2px;
+    }
+
+    /* Cards */
+    .card {
+      background-color: rgba(15, 23, 42, 0.7);
+      border: none;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(8px);
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(0, 198, 255, 0.2);
+    }
+
+    .card-img-top {
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+
+    .card:hover .card-img-top {
+      transform: scale(1.05);
+    }
+
+    .card-body {
+      padding: 1.5rem;
+    }
+
+    .card-title {
+      color: var(--primary);
+      font-weight: 700;
+    }
+    p.card-text {
+    color: #ffffff;
+    }
+
+    /* Tech Stack Icons */
+    .tech-icon {
+      font-size: 2.5rem;
+      margin: 0.5rem;
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .tech-item {
+      text-align: center;
+      padding: 1.5rem;
+      transition: all 0.3s;
+    }
+
+    .tech-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .tech-label {
+      margin-top: 0.5rem;
+      font-weight: 600;
+    }
+
+    /* Buttons */
+    .btn-gradient {
+      background: linear-gradient(45deg, var(--primary), var(--secondary));
+      border: none;
+      color: white;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 0.75rem 2rem;
+      border-radius: 50px;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(0, 198, 255, 0.3);
+    }
+
+    .btn-gradient:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 198, 255, 0.4);
+      color: white;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--darker);
+      color: var(--gray);
+      padding: 2rem 0;
+      margin-top: 4rem;
+    }
+
+    /* Utility Classes */
+    .text-gradient {
+      background: linear-gradient(to right, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .bg-glass {
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="/">Badminton Flex</a>
+  
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/live_session">Practice</a></li>
+          <li class="nav-item"><a class="nav-link active" href="/about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
+  
+          <!-- Profile Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center active" href="#" id="navbarProfile" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <span class="profile-avatar-small rounded-circle me-2 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: linear-gradient(45deg, var(--primary), var(--secondary));">
+                {{ user.name[0] | upper }}
+              </span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end bg-glass" aria-labelledby="navbarProfile">
+              <li><a class="dropdown-item text-light" href="/profile"><i class="bi bi-person me-2"></i>Profile</a></li>
+              <li><a class="dropdown-item text-light" href="#"><i class="bi bi-gear me-2"></i>Settings</a></li>
+              <li><hr class="dropdown-divider bg-secondary"></li>
+              <li><a class="dropdown-item text-light" href="/logout"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero-section">
+    <div class="hero-content container">
+      <h1 class="animate__animated animate__fadeInDown">About Badminton Flex</h1>
+      <p class="animate__animated animate__fadeIn animate__delay-1s">Revolutionizing Badminton Training with Real-Time Feedback</p>
+      <a href="/live_session" class="btn btn-gradient animate__animated animate__fadeInUp animate__delay-1s">Get Started <i class="bi bi-arrow-right ms-2"></i></a>
+    </div>
+  </header>
+
+  <!-- About Us Content -->
+  <section class="container py-5 mt-5">
+    <div class="text-center mb-5">
+      <h2 class="section-title animate__animated animate__fadeIn">Who We Are</h2>
+      <p class="lead mx-auto animate__animated animate__fadeIn animate__delay-1s" style="max-width: 800px;">
+        Badminton Flex was created to bridge the gap between beginner players and professional-level coaching.
+      </p>
+    </div>
+
+    <div class="row align-items-center mb-5 g-5">
+      <div class="col-md-6 animate__animated animate__fadeInLeft">
+        <img src="static/images/eb29d3120cfc775cb4aa3a8cb91b70f3_high.webp" alt="Coach Training" class="img-fluid rounded-4 shadow-lg">
+      </div>
+      <div class="col-md-6 animate__animated animate__fadeInRight">
+        <div class="bg-glass p-4 rounded-4">
+          <h4 class="text-gradient">Our Mission</h4>
+          <p>
+            To democratize access to professional badminton coaching through cutting-edge technology. 
+            Badminton Flex empowers athletes of all levels to improve their skills, track their performance,
+            and receive real-time feedback—anytime, anywhere.
+          </p>
+          <h4 class="text-gradient mt-4">Developed By</h4>
+          <p>
+            <i class="bi bi-person-badge me-2"></i>R.M.S.J. Bandara (W1866979 – 20200649)  
+            <br><i class="bi bi-building me-2"></i>Software Engineering Program, University of Westminster.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Technology Section -->
+  <section class="container py-5">
+    <div class="text-center mb-5">
+      <h2 class="section-title animate__animated animate__fadeIn">Our Technology</h2>
+      <p class="lead mx-auto animate__animated animate__fadeIn animate__delay-1s" style="max-width: 800px;">
+        Badminton Flex combines biomechanics, computer vision pose analysis
+        to deliver personalized coaching and instant feedback.
+      </p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4 animate__animated animate__fadeInUp">
+        <div class="card h-100">
+          <img src="static/images/2a590e594612a568bfa882cd58353701_high.webp" class="card-img-top" alt="Pose Estimation">
+          <div class="card-body">
+            <h5 class="card-title text-gradient"><i class="bi bi-body-text me-2"></i>Pose Estimation</h5>
+            <p class="card-text">Real-time body tracking to detect posture and movement patterns, ensuring perfect form during play.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 animate__animated animate__fadeInUp animate__delay-1s">
+        <div class="card h-100">
+          <img src="static/images/46a1f7e7d157473a48c87dd64fc2a6d6_high.webp" class="card-img-top" alt="Machine Learning">
+          <div class="card-body">
+            <h5 class="card-title text-gradient"><i class="bi bi-cpu me-2"></i>Machine Learning</h5>
+            <p class="card-text">Our shot classification model leverages CNNs to recognize different badminton strokes with high accuracy.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 animate__animated animate__fadeInUp animate__delay-2s">
+        <div class="card h-100">
+          <img src="static/images/9a6058bf341f9cab68063aca0a34c66e_high.webp" class="card-img-top" alt="Feedback System">
+          <div class="card-body">
+            <h5 class="card-title text-gradient"><i class="bi bi-lightning-charge me-2"></i>Instant Feedback</h5>
+            <p class="card-text">Receive corrective feedback immediately after each shot, improving technique and reducing errors quickly.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech Stack Section -->
+  <section class="container py-5">
+    <div class="text-center mb-5">
+      <h2 class="section-title animate__animated animate__fadeIn">Our Tech Stack</h2>
+      <p class="lead mx-auto animate__animated animate__fadeIn animate__delay-1s" style="max-width: 800px;">
+        Built with modern technologies to deliver a powerful and seamless experience
+      </p>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="bg-glass p-5 rounded-4">
+          <div class="row text-center">
+            <!-- Backend Technologies -->
+            <div class="col-md-4 mb-4">
+              <h4 class="text-gradient mb-4">Backend</h4>
+              <div class="tech-item">
+                <i class="bi bi-filetype-py tech-icon"></i>
+                <div class="tech-label">Python</div>
+              </div>
+              <div class="tech-item">
+                <i class="bi bi-server tech-icon"></i>
+                <div class="tech-label">Flask</div>
+              </div>
+              <div class="tech-item">
+                <i class="bi bi-database tech-icon"></i>
+                <div class="tech-label">Mongodb</div>
+              </div>
+            </div>
+            
+            <!-- Frontend Technologies -->
+            <div class="col-md-4 mb-4">
+              <h4 class="text-gradient mb-4">Frontend</h4>
+              <div class="tech-item">
+                <i class="bi bi-bootstrap tech-icon"></i>
+                <div class="tech-label">Bootstrap 5</div>
+              </div>
+              <div class="tech-item">
+                <i class="bi bi-filetype-html tech-icon"></i>
+                <div class="tech-label">HTML5</div>
+              </div>
+              <div class="tech-item">
+                <i class="bi bi-filetype-css tech-icon"></i>
+                <div class="tech-label">CSS3</div>
+              </div>
+              <div class="tech-item">
+                <i class="bi bi-filetype-js tech-icon"></i>
+                <div class="tech-label">JavaScript</div>
+              </div>
+            </div>
+            
+            <!-- ML Technologies -->
+            <div class="col-md-4 mb-4">
+              <h4 class="text-gradient mb-4">LSTM-CNN</h4>
+              <div class="tech-item">
+                <i class="bi bi-robot tech-icon"></i>
+                <div class="tech-label">OpenCV</div>
+              </div>
+              <div class="tech-item">
+                <i class="bi bi-diagram-3 tech-icon"></i>
+                <div class="tech-label">MediaPipe</div>
+              </div>
+              <div class="tech-item">
+                <i class="bi bi-cpu tech-icon"></i>
+                <div class="tech-label">TensorFlow</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="text-center mt-4">
+            <a href="https://github.com/SandaruBandara2001/FYP" class="btn btn-gradient" target="_blank">
+              <i class="bi bi-github me-2"></i>View on GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center">
+    <div class="container">
+      <p>&copy; 2025 Badminton Flex | All Rights Reserved</p>
+      <div class="mt-3">
+        <a href="#" class="text-light me-3"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="text-light me-3"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="text-light me-3"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="text-light"><i class="bi bi-linkedin"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Add animation on scroll
+    document.addEventListener('DOMContentLoaded', function() {
+      const animateElements = document.querySelectorAll('.animate__animated');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add(entry.target.dataset.animate);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+
+      animateElements.forEach(el => {
+        el.dataset.animate = el.classList.contains('animate__fadeIn') ? 'animate__fadeIn' : 
+                            el.classList.contains('animate__fadeInLeft') ? 'animate__fadeInLeft' :
+                            el.classList.contains('animate__fadeInRight') ? 'animate__fadeInRight' :
+                            el.classList.contains('animate__fadeInUp') ? 'animate__fadeInUp' : 'animate__fadeIn';
+        el.classList.remove('animate__animated', 'animate__fadeIn', 'animate__fadeInLeft', 'animate__fadeInRight', 'animate__fadeInUp');
+        observer.observe(el);
+      });
+    });
+  </script>
+</body>
+</html>

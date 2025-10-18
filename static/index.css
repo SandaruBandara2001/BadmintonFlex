@@ -1,0 +1,20 @@
+body { background-color: #1c1c1c; color: #fff; }
+        .btn-primary { background-color: red; border: none; }
+        .section { padding-top: 300px; }
+        .card { background-color: #111; color: white; padding: 20px; border-radius: 0; }
+        .padded { margin-top: 200px; margin-bottom: 200px; }
+        .hero-section { 
+            background: url('../templates/images/hd-badminton-background.jpg') no-repeat center center/cover; 
+            padding: 100px 0; 
+            text-align: center; 
+        }
+        .navbar-nav .nav-item .nav-link.active {
+        color: red !important;
+    }
+    .btn{
+        border-radius: 0%;
+    } 
+    .live-section-1 {
+        padding-top: 7rem;
+        padding-bottom: 7rem;
+    }

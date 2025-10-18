@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shot Demonstration - Badminton Flex</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"/>
+
+    <!-- Custom Theme -->
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .card {
+            background-color: rgba(15, 23, 42, 0.7);
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(8px);
+        }
+
+        .video-container {
+            margin-top: 5rem;
+        }
+
+        .video-container video {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 12px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #00c6ff, #0072ff);
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(45deg, #0072ff, #00c6ff);
+        }
+
+        .btn-danger {
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-danger:hover {
+            background: linear-gradient(45deg, #ff4b2b, #ff416c);
+        }
+
+        .btn-container {
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container text-center video-container">
+        <h2 class="my-4">🏸 Shot Demonstration: {{ shot_name | capitalize }}</h2>
+
+        <!-- Demonstration Video -->
+        <video id="demoVideo" autoplay controls>
+            <!-- Correct video source path -->
+            <source src="/static/video/{{ shot_name }}_demo.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <br><br>
+
+        <!-- Button to start live session -->
+        <div id="startLiveSessionBtnContainer" class="btn-container">
+            <button id="startLiveSessionBtn" class="btn btn-primary" onclick="startLiveSession()">Start Live Session</button>
+        </div>
+
+        <!-- Button to stop live session -->
+        <div id="stopLiveSessionBtnContainer" class="btn-container d-none">
+            <button id="stopLiveSessionBtn" class="btn btn-danger" onclick="stopLiveSession()">Stop Session</button>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const demoVideo = document.getElementById('demoVideo');
+        const startLiveSessionBtn = document.getElementById('startLiveSessionBtn');
+        const stopLiveSessionBtn = document.getElementById('stopLiveSessionBtn');
+        const startLiveSessionBtnContainer = document.getElementById('startLiveSessionBtnContainer');
+        const stopLiveSessionBtnContainer = document.getElementById('stopLiveSessionBtnContainer');
+
+        // Listen for the end of the demo video and display the "Stop Live Session" button
+        demoVideo.addEventListener('ended', function () {
+            startLiveSessionBtnContainer.classList.add('d-none');  // Hide the "Start Live Session" button
+            stopLiveSessionBtnContainer.classList.remove('d-none'); // Show the "Stop Live Session" button
+        });
+
+        function startLiveSession() {
+            // Redirect to the live session page
+            window.location.href = "/live_session";
+        }
+
+        function stopLiveSession() {
+            // Hide the "Stop Live Session" button and redirect back to the live session page
+            stopLiveSessionBtnContainer.classList.add('d-none');
+            window.location.href = "/live_session";  // Redirect to live session page
+        }
+    </script>
+</body>
+</html>
